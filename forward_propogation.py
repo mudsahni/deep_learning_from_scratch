@@ -194,4 +194,5 @@ def neural_network(inp, weights):
     prediction = hidden.dot(weights[1].T)
     return prediction
 
+
 print(neural_network(inp, weights))
