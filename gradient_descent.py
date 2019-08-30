@@ -27,9 +27,11 @@ HOT and COLD method
 weight = 0.1
 lr = 0.01
 
+
 def neural_network(input, weight):
     prediction = input*weight
     return prediction
+
 
 number_of_toes = [8.5]
 win_or_loss_binary = [1]
@@ -66,25 +68,27 @@ ground_truth = 0.8
 
 step = 0.001
 
+
 def squared_difference(prediction, truth):
     return (prediction-truth)**2
+
 
 for i in range(1101):
     prediction = neural_network(input, weight)
     error = squared_difference(prediction, ground_truth)
     print(f"Iteration: {i} Error: {error} Prediction: {prediction}")
-    
+
     high_prediction = neural_network(input, weight+step)
     high_error = squared_difference(high_prediction, ground_truth)
-    
+
     low_prediction = neural_network(input, weight-step)
     low_error = squared_difference(low_prediction, ground_truth)
-    
+
     if low_error < high_error:
         weight -= step
     else:
         weight += step
-        
+
 
 """
 Getting direction and error in the same line
@@ -99,10 +103,10 @@ for i in range(20):
     error = (prediction-ground_truth)**2
     direction_and_amount = (prediction-ground_truth)*input
     weight -= direction_and_amount
-    
+
     print(f"Iteration: {i} Error: {error} Prediction: {prediction}")
-    
-    
+
+
 """
 Now we want to find the change in error with the change in weights.
 For that we will use the chain rule.
@@ -130,12 +134,14 @@ W -= dE_dW * alpha
 
 W, GT, X = (0.0, 0.8, 0.5)
 
+
 def weight_derivative(P, GT, X):
     dE_dP = (P-GT)
     dP_dW = X
     dE_dW = dE_dP*dP_dW
     return dE_dW
-    
+
+
 for i in range(50):
     P = neural_network(X, W)
     E = squared_difference(P, GT)
